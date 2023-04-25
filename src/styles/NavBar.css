@@ -1,0 +1,108 @@
+.navbar-main-container{
+    height: 10vh;
+    position: relative;
+    /* background-color: aqua; */
+    /* padding: 20px; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 30px;
+    padding-right: 20px;
+}
+
+
+.navbar-main-container .img-container img{
+    width: 100px;
+    padding-bottom: 5px;
+    z-index: -1;
+}
+
+
+.navbar-main-container .menu-container{
+    display: flex;
+    justify-content: center;
+    
+}
+.navbar-main-container .menu-container p{
+    padding: 0 10px;
+    font-weight: 500;
+    position: relative;
+}
+
+.navbar-main-container .menu-container a{
+    text-decoration: none;
+}
+
+
+.cart-number{
+    position: absolute;
+    top:-12px;
+    background-color: aqua;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    transform: translate(-50%,0);
+}
+
+
+.shop-cart-icon{
+    /* height: 14px;     */
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.menu-container .icon-profile:hover{
+    /* background-color: brown ; */
+}
+.menu-container .icon-profile{
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+
+
+.container-profile .user-email{
+    font-size: 10px;
+}
+.container-profile .user-name{
+    font-weight: 800;
+    font-size: 20px;
+}
+.container-profile{
+    background-color: #fff;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+    flex-direction: column;
+    top:90%;
+    border-radius: 30px;
+    /* top:5px; */
+    right:10%;
+    height: 150px;
+    width: 200px;
+    /* flex-wrap: wrap; */
+    /* width: fit-content; */
+    position: absolute;
+    animation-name: profile-appere;
+    animation-duration: 0.5s;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+@keyframes profile-appere {
+    0%{
+        top:80%;
+        opacity: 0;
+    }
+    /* 50%{
+        top:90%;
+        opacity: 0.5;
+    } */
+    100%{
+        top:90%;
+        opacity: 1;
+    }
+}

@@ -1,0 +1,246 @@
+*{
+  padding: 0;
+
+}
+.food-cart-container {
+  /* background-color: aqua; */
+  min-height: 1000px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+}
+
+/* .food-cart-container */
+.food-cart-container .food-cart-item-container input {
+  max-width: 50px;
+  min-width: 50px;
+}
+
+.food-cart-container .food-cart-item-container input::-webkit-outer-spin-button,
+.food-cart-container .food-cart-item-container input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+
+}
+
+.food-cart-container .fooditem-main-container {
+  max-width: 50px;
+  min-height: 150px;
+}
+
+.food-cart-container .food-cart-item-container p {
+  flex: 1;
+}
+
+.food-cart-container .food-cart-item-container {
+  width: 95%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 10px;
+  flex-wrap: wrap;
+  /* background-color: aqua; */
+  margin: auto;
+}
+
+
+.food-cart-container .delete-btn {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.food-cart-container .delete-btn:hover,
+.food-cart-container .delete-btn:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.food-cart-container .delete-btn:hover {
+  transform: translateY(-1px);
+}
+
+.food-cart-container .delete-btn:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+
+.food-cart-container .delete-btn {
+  /* max-width: 20px; */
+  min-width: 150px;
+  /* flex: 1; */
+  /* background-color: aqua; */
+}
+
+.food-cart-container input {
+  min-height: 20px;
+  margin: 5px;
+  flex: 1;
+  /* width: 40px; */
+
+  /* -    width: 30px; */
+}
+
+.food-cart-container .total-price-container {
+  min-height: 50px;
+  padding-left: 5px;
+}
+
+
+
+
+.total-price-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%,0);
+  background-color: aliceblue;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+
+
+.food-cart-item-container .amount-item-container .btn-minus,
+.food-cart-item-container .amount-item-container .btn-plus {
+  background-color: azure;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.out-size-container {
+  position: fixed;
+  top: -10%;
+  height: 1000px;
+  width: 100vw;
+  background-color: gray;
+  opacity: 0.8;
+
+}
+
+.food-cart-container .container-1 p {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.food-cart-container .container-1 .title {
+  position: absolute;
+  top: -60px;
+  left:50%;
+  transform: translate(-50%,0);
+}
+.food-cart-container .container-1 .icon-close{
+  font-size: 30px;
+  position: absolute;
+  top:-25%;
+  right: 0px;
+  transform: translate(-50%,0);
+  /* left:100%; */
+  cursor: pointer;
+}
+.food-cart-container .container-1 .con-at-store .icon,
+.food-cart-container .container-1 .con-at-deliver .icon {
+  position: absolute;
+  font-size: 20px;
+  right:10%;
+}
+.food-cart-container .container-1 .con-at-store,
+.food-cart-container .container-1 .con-at-deliver {
+  display: flex;
+  flex: 1;
+  /* justify-content: space-around; */
+  /* justify-content: center; */
+  /* flex: 1; */
+  align-items: center;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  /* background-color: red; */
+}
+.food-cart-container .container-1 .con-at-store input,
+.food-cart-container .container-1 .con-at-deliver input {
+  max-height: 20px;
+  max-width: 20px;
+}
+
+
+.food-cart-container .container-1 {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: aqua;
+  min-height: 200px;
+  min-width: 400px;
+  color: black;
+  border-radius: 40px;
+  animation-name: go-down-sec;
+  animation-duration: 0.8s;
+  /* opacity: 0.8; */
+  /* z-index: 1; */
+}
+
+.food-cart-container .container-1.hide{
+  position: fixed;
+  left:-1000%;
+}
+.hide{
+  position: fixed;
+  left:-1000%;
+}
+
+@media (width<=600px) {
+  .food-cart-container .food-cart-item-container {
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 10px;
+    flex-wrap: wrap;
+    /* background-color: aqua; */
+    margin: auto;
+  }
+}
+
+
+@keyframes go-down-sec {
+  0%{
+    top:20%;
+    opacity:0
+  }
+  100%{
+    top:50%;
+    opacity:1
+  }
+}

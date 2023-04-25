@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+
+.main-conainer{
+  background-color: blue;
+  height: 300px;
+}
+
+
+
+
+
+.section-selected{
+  color: #FA4A0C;
+}
+
+a>*{
+  text-decoration: none;
+}

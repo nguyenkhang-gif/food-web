@@ -1,0 +1,199 @@
+.fooditempage-main-container{
+  height: 90vh;
+  width: 85%;
+  margin: auto;
+  /* background-color: aqua;  */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2%;
+}
+
+
+
+.left-nav-container{
+    position: relative;
+    width: 40%;
+    height: 90%;
+    min-width: 400px;
+    margin: 2%;
+    /* margin-top: 5%; */
+    /* background-color: aquamarine; */
+}
+
+
+.right-nav-container{
+    /* background-color: aquamarine; */
+    width: 50%;
+    min-width: 400px;
+    height: 90%;
+    margin: 2%;
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.right-nav-container h1{
+   margin: 20px;
+}
+
+
+
+.container-img{
+    height: 70%;
+    width: 100%;
+}
+.container-img img{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    height: 70%;
+    border-radius: 50%;
+    /* width: 80%; */
+    /* height: 70%; */
+    
+    max-width: 400px;
+
+}
+
+
+
+
+.container-item-price-name{
+    width: 100%;
+    min-width: 400px;
+    display: flex;
+    padding: 0;
+    margin: 0;
+    align-items: center; 
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+
+.container-item-price-name p{
+    color: #FA4A0C;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/* <!-- HTML !--> */
+/* <button class="btn-add-to-cart" role="button">Button 5</button> */
+
+/* CSS */
+.btn-add-to-cart {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.btn-add-to-cart:hover,
+.btn-add-to-cart:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.btn-add-to-cart:hover {
+  transform: translateY(-1px);
+}
+
+.btn-add-to-cart:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+
+@media screen and (max-width:640px) {
+    .container-img img{
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    height: 70%;
+        border-radius: 50%;
+        /* width: 80%; */
+        /* height: 70%; */
+        
+        max-width: 200px;
+        max-height: 200px;
+    
+    }
+
+
+    .container-img{
+        height: 800px;
+        width: 100%;
+    }
+
+    .left-nav-container{
+        position: relative;
+        width: 40%;
+        height: 600px;
+        min-width: 400px;
+        margin: 2%;
+        /* margin-top: 5%; */
+        /* background-color: aquamarine; */
+    }
+    .container-item-price-name{
+        width: 100%;
+        min-width: 400px;
+        display: flex;
+        padding: 0;
+        margin: 0;
+        align-items: center; 
+        justify-content: center;
+        flex-direction: column;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,0);
+    }
+    
+    .right-nav-container{
+        /* background-color: aquamarine; */
+        /* width: 50%; */
+        min-width: 350px;
+        height: 90%;
+        margin: 2%;
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .fooditempage-main-container{
+        height: 2000px;
+        width: 85%;
+        margin: auto;
+        background-color: aqua; 
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        border-radius: 2%;
+      }
+      
+}

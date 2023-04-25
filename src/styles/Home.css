@@ -1,0 +1,123 @@
+.home-main-container{
+    /* background-color: ; */
+    
+}
+.home-main-container .intro-container {
+    position: relative;
+}
+.home-main-container .intro-container .content-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+}
+.home-main-container .intro-container .content-container h1{
+    color: aliceblue;
+    
+}
+.home-main-container .intro-container .content-container p{
+    color: aliceblue;
+    font-size:50px;
+}
+.home-main-container .intro-container img{
+   width: 100%;
+   
+}
+
+
+.food-item-container{
+    display: flex;
+    height: 1000px;
+    flex-wrap: wrap;
+    
+}
+
+
+.home-main-container .container-search-bar .icon-search{
+    position: absolute;
+    right:0;
+    top:50%;
+    transform: translate(-50%,-50%);
+    font-weight: 700;
+}
+.home-main-container .container-search-bar input{
+    min-height: 30px;
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 200px;
+    padding-left: 10px;
+    
+}
+
+.home-main-container .container-search-bar input:not(:focus){
+
+    transition: all 1s ease;
+}
+.home-main-container .container-search-bar input:focus{
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    transition: all 1s ease;
+}
+.home-main-container .container-search-bar .container-inner{
+    position: relative;
+    width: 70%;
+}
+.home-main-container .container-search-bar{
+    min-height: 50px;
+    /* background-color: aqua; */
+    margin-top: 3px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
+}
+
+
+/* input serach bar !!!!!!!!!!!!!!!! */
+
+
+
+
+
+@media screen and (max-width:1100px) {
+    .home-main-container .intro-container .content-container h1{
+        color: aliceblue;
+        font-size:30px;
+        
+    }
+    .home-main-container .intro-container .content-container p{
+        color: aliceblue;
+        font-size:30px;
+    }
+    .home-main-container .intro-container img{
+       width: 100%;
+       
+    }
+}
+@media (width<=640px) {
+    .home-main-container .intro-container .content-container h1{
+        /* color: aliceblue; */
+        font-size:14px;
+        
+    }
+    .home-main-container .intro-container .content-container p{
+        /* color: aliceblue; */
+        font-size:14px;
+    }
+    .home-main-container .intro-container img{
+       width: 100%;
+       
+    }
+    .food-item-container{
+        display: flex;
+        /* flex-direction: column; */
+        justify-content: center;
+        align-items: center;
+    }
+    .fooditem-main-container{
+        width: 50%;
+    }
+}
