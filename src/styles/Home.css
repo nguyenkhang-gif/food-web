@@ -60,6 +60,12 @@
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     transition: all 1s ease;
 }
+.home-main-container .container-search-bar .container-inner .icon-search{
+    cursor: pointer;
+}
+.home-main-container .container-search-bar .container-inner .icon-search:hover{
+    font-weight: 700;
+}
 .home-main-container .container-search-bar .container-inner{
     position: relative;
     width: 70%;
