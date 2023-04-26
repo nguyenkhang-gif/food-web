@@ -1,6 +1,7 @@
 .home-main-container{
     /* background-color: ; */
-    
+    padding: 0 20px;
+    background-color:  #D3D3D3;
 }
 .home-main-container .intro-container {
     position: relative;
@@ -28,7 +29,7 @@
 
 .food-item-container{
     display: flex;
-    height: 1000px;
+    height: fit-content;
     flex-wrap: wrap;
     
 }

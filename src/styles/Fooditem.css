@@ -49,6 +49,7 @@
     padding: 20px;
     height: 20%;
     min-width: 170px;
+    min-height: 200px;
     /* background-color: aqua; */
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

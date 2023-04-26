@@ -2,12 +2,42 @@
     height: fit-content;
     
 }
+.fooditempage-main-container .item-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+} 
+
+.fooditempage-main-container .right-nav-container p{
+    margin: 30px;
+}
+
+.right-nav-container .header{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.fooditempage-main-container .right-nav-container{
+    flex: 2;
+    margin: 30px;
+    padding: 30px;
+    padding-bottom: 20px;
+    /* background-color: aqua; */
+    text-align: left;
+    /* min-width: 300px; */
+    /* max-width: 400px; */
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
+}
 .fooditempage-main-container .left-nav-container{
+    flex: 1;
     margin: 30px;
     padding: 10px;
     padding-bottom: 20px;
     /* background-color: aqua; */
-    max-width: 400px;
+    /* max-width: 400px; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,4 +131,27 @@
   background-color: #c85000;
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
+}
+
+
+
+/* comment css */
+.fooditempage-main-container
+.comment-container {
+    min-height: 400px;
+    margin: 0 20px ;
+    background-color: #fff;
+    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+
+.comment-container .title{
+    font-size: 20px;
+    font-weight: 600;
+    padding-top: 20px;
+    margin: 10px 20px;
+    text-align: left;
+    border-bottom: 1px solid black;
 }

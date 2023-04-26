@@ -31,6 +31,7 @@ const FooditemPage = () => {
     const pathID = window.location.pathname
     const [foodInfo, setFoodInfo] = useState()
     const [foodNamePrice, setFoodNamePrice] = useState()
+    const [allComments,setAllComment]= useState([])
     useEffect(() => {
         DATA.forEach(item => {
             if (pathID.split('/')[2] == item.id) setFoodInfo(item);
@@ -38,6 +39,7 @@ const FooditemPage = () => {
         productsData.forEach(item => {
             if (pathID.split('/')[2] == item.id) setFoodNamePrice(item);
         })
+
         // productsData
         console.log(pathID.split('/')[2])
     }, [])
@@ -62,13 +64,21 @@ const FooditemPage = () => {
                 </div>
                 {/* end of left nav */}
                 {/* right nav */}
-                <div className="right-nav-container">
-                    
-                </div>
+                {foodInfo?<div className="right-nav-container">
+                    <p className='header'>mô tả món ăn</p>
+                    <p>{foodInfo.deliveryInfo}</p>
+                    <p className='header'>Chính sách hoàn tiền</p>
+                    <p>Hoàn tiền 100% nếu món ăn giao đến không đạt chất lượng hoặc không giống với hình </p>
+                </div>:null}
 
                 {/* end of right nav */}
             </div>
             {/* comment container */}
+            <div className="comment-container">
+                {/* title */}
+                <p className='title'>Đánh giá</p>
+                {/* end of title */}
+            </div>
             {/*  end of comment container */}
         </div>
     )

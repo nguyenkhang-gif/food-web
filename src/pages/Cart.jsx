@@ -6,6 +6,7 @@ import { AiOutlineShoppingCart } from 'react-icons'
 import { AiFillCloseCircle, AiFillCreditCard } from 'react-icons/ai'
 import { BiStoreAlt } from 'react-icons/bi'
 import { FaStoreAlt } from 'react-icons/fa'
+import { TbTruckDelivery } from 'react-icons/tb'
 
 const Cart = () => {
 
@@ -65,7 +66,7 @@ const Cart = () => {
 
 
   // sử lý các chọn phương thức take out or delivery
-  const [choseTakeoutDelivery, setChoseTakeoutDelivery] = useState([true, false])
+  const [choseTakeoutDelivery, setChoseTakeoutDelivery] = useState([true, false,false])
   //end
 
   // sử lý cộng số lượng cho item
@@ -137,10 +138,16 @@ return (
           <AiFillCreditCard className='icon' />
         </div>
         <div className="con-at-deliver">
-          <input type="checkbox" key={2} onChange={() => { setChoseTakeoutDelivery([false, true]) }} checked={choseTakeoutDelivery[1]} />
+          <input type="checkbox" key={2} onChange={() => { setChoseTakeoutDelivery([false, true,false]) }} checked={choseTakeoutDelivery[1]} />
           <p>thanh toán tại cửa hàng</p>
           <FaStoreAlt className='icon' />
         </div>
+        <div className="con-at-deliver">
+          <input type="checkbox" key={2} onChange={() => { setChoseTakeoutDelivery([false,false, true]) }} checked={choseTakeoutDelivery[2]} />
+          <p>giao hàng</p>
+          <TbTruckDelivery className='icon' />
+        </div>
+        <button >Xác nhận</button>
       </div>
       : null}
     {/* end of phương thức thanh toán */}
