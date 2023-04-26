@@ -50,7 +50,9 @@ const NavBar = () => {
   return (
     <div className='navbar-main-container'>
       <div className="img-container">
+        <Link to={'/'}>
         <img src={logo} alt="" className='img' />
+        </Link>
       </div>
       {isHoverUserIcon ? <div className="container-profile">
         <p className='user-name'>{user?.Name}</p>

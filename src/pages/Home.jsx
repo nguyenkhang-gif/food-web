@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/Home.css'
 // import '../assets/food_img/hambuger.png'
 import homepagebg from '../assets/homepagebg.png'
 import FoodItem from '../component/FoodItem'
 import { FiSearch } from 'react-icons/fi'
+import { productsData } from '../db.js'
 
 const Data = [
     {
@@ -39,6 +40,10 @@ const Data = [
 ]
 
 const Home = () => {
+    const [allproduct,setAllProduct]= useState([])
+    useEffect(()=>{
+        setAllProduct(productsData)
+    },[])
     return (
         <div className='home-main-container'>
             <div className="intro-container" >
@@ -64,8 +69,8 @@ const Home = () => {
             {/* end of search bar */}
 
             <div className="food-item-container">
-                {Data.map((item) => {
-                    return (<FoodItem id={item.id} key={item.id} price={item.price} imgurl={item.imgurl} name={item.name} />)
+                {allproduct.map((item) => {
+                    return (<FoodItem id={item.id} key={item.id} price={item.Price} imgurl={item.imgurl} name={item.Name} />)
                 })}
             </div>
         </div>

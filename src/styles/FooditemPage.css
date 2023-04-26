@@ -1,90 +1,64 @@
-.fooditempage-main-container{
-  height: 90vh;
-  width: 85%;
-  margin: auto;
-  /* background-color: aqua;  */
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2%;
-}
-
-
-
-.left-nav-container{
-    position: relative;
-    width: 40%;
-    height: 90%;
-    min-width: 400px;
-    margin: 2%;
-    /* margin-top: 5%; */
-    /* background-color: aquamarine; */
-}
-
-
-.right-nav-container{
-    /* background-color: aquamarine; */
-    width: 50%;
-    min-width: 400px;
-    height: 90%;
-    margin: 2%;
-    display: flex;
-    padding: 10px;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.right-nav-container h1{
-   margin: 20px;
-}
-
-
-
-.container-img{
-    height: 70%;
-    width: 100%;
-}
-.container-img img{
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    height: 70%;
-    border-radius: 50%;
-    /* width: 80%; */
-    /* height: 70%; */
+.fooditempage-main-container{ 
+    height: fit-content;
     
+}
+.fooditempage-main-container .left-nav-container{
+    margin: 30px;
+    padding: 10px;
+    padding-bottom: 20px;
+    /* background-color: aqua; */
     max-width: 400px;
-
-}
-
-
-
-
-.container-item-price-name{
-    width: 100%;
-    min-width: 400px;
     display: flex;
-    padding: 0;
-    margin: 0;
-    align-items: center; 
-    justify-content: center;
     flex-direction: column;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,0);
+    align-items: center;
 }
 
+.fooditempage-main-container .item-info-container{ 
+    min-height: 400px;
+    margin: 0 20px ;
+    background-color: #fff;
+    margin-top: 40px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
 
-.container-item-price-name p{
-    color: #FA4A0C;
+.fooditempage-main-container img {
+    height: 100%;
+    
+}
+
+.container-name-price-addtocartbtn button{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.container-name-price-addtocartbtn .Name{
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
+    margin-top: 20px;
+}
+.container-name-price-addtocartbtn .Price{
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: 800;
+    color: #FA4A0C;
+}
+.fooditempage-main-container .img-container {
+    margin: 30px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-/* <!-- HTML !--> */
-/* <button class="btn-add-to-cart" role="button">Button 5</button> */
+
+
+/* button style */
+/* <!-- HTML !-->
+<button class=.container-name-price-addtocartbtn button" role="button">Button 5</button> */
 
 /* CSS */
-.btn-add-to-cart {
+.container-name-price-addtocartbtn button {
   align-items: center;
   background-clip: padding-box;
   background-color: #fa6400;
@@ -113,87 +87,18 @@
   width: auto;
 }
 
-.btn-add-to-cart:hover,
-.btn-add-to-cart:focus {
+.container-name-price-addtocartbtn button:hover,
+.container-name-price-addtocartbtn button:focus {
   background-color: #fb8332;
   box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
 }
 
-.btn-add-to-cart:hover {
+.container-name-price-addtocartbtn button:hover {
   transform: translateY(-1px);
 }
 
-.btn-add-to-cart:active {
+.container-name-price-addtocartbtn button:active {
   background-color: #c85000;
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
-}
-
-
-@media screen and (max-width:640px) {
-    .container-img img{
-        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    height: 70%;
-        border-radius: 50%;
-        /* width: 80%; */
-        /* height: 70%; */
-        
-        max-width: 200px;
-        max-height: 200px;
-    
-    }
-
-
-    .container-img{
-        height: 800px;
-        width: 100%;
-    }
-
-    .left-nav-container{
-        position: relative;
-        width: 40%;
-        height: 600px;
-        min-width: 400px;
-        margin: 2%;
-        /* margin-top: 5%; */
-        /* background-color: aquamarine; */
-    }
-    .container-item-price-name{
-        width: 100%;
-        min-width: 400px;
-        display: flex;
-        padding: 0;
-        margin: 0;
-        align-items: center; 
-        justify-content: center;
-        flex-direction: column;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,0);
-    }
-    
-    .right-nav-container{
-        /* background-color: aquamarine; */
-        /* width: 50%; */
-        min-width: 350px;
-        height: 90%;
-        margin: 2%;
-        display: flex;
-        padding: 10px;
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .fooditempage-main-container{
-        height: 2000px;
-        width: 85%;
-        margin: auto;
-        background-color: aqua; 
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        border-radius: 2%;
-      }
-      
 }

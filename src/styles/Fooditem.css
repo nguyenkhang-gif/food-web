@@ -1,10 +1,25 @@
 .fooditem-main-container img{
     /* width: 10%; */
+    /* height: 100%; */
+    /* max-width: 170px; */
+    /* max-height: 170px; */
+    /* position: absolute; */
+    /* top:-30%; */
+    /* left:50%; */
+    height: 100%;
+    
+    /* transform: translate(-50%,0); */
+}
+.fooditem-main-container .food-item-img {
     height: 80%;
+    max-width: 170px;
     max-height: 170px;
     position: absolute;
     top:-30%;
     left:50%;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color:aqua;
     transform: translate(-50%,0);
 }
 .fooditem-main-container p{
