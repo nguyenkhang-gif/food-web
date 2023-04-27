@@ -12,7 +12,7 @@ const FoodItem = ({ imgurl, price, name, key, id }) => {
         <p>
           {name}
         </p>
-        <span>{price}đ</span>
+        {price?<span>{price}đ</span>:null}
       </Link>
     </div>
   )

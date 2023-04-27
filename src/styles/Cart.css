@@ -146,77 +146,8 @@
 
 }
 
-.food-cart-container .container-1 p {
-  font-size: 20px;
-  font-weight: 700;
-}
-
-.food-cart-container .container-1 .title {
-  position: absolute;
-  top: -60px;
-  left:50%;
-  transform: translate(-50%,0);
-}
-.food-cart-container .container-1 .icon-close{
-  font-size: 30px;
-  position: absolute;
-  top:-25%;
-  right: 0px;
-  transform: translate(-50%,0);
-  /* left:100%; */
-  cursor: pointer;
-}
-.food-cart-container .container-1 .con-at-store .icon,
-.food-cart-container .container-1 .con-at-deliver .icon {
-  position: absolute;
-  font-size: 20px;
-  right:10%;
-}
-.food-cart-container .container-1 .con-at-store,
-.food-cart-container .container-1 .con-at-deliver {
-  display: flex;
-  flex: 1;
-  /* justify-content: space-around; */
-  /* justify-content: center; */
-  /* flex: 1; */
-  align-items: center;
-  padding-left: 20px;
-  padding-bottom: 10px;
-  /* background-color: red; */
-}
-.food-cart-container .container-1 .con-at-store input,
-.food-cart-container .container-1 .con-at-deliver input {
-  max-height: 20px;
-  max-width: 20px;
-}
 
 
-.food-cart-container .container-1 {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  height: fit-content;
-  padding: 30px;
-  transform: translate(-50%, -50%);
-  background-color: aqua;
-  min-height: 200px;
-  min-width: 400px;
-  color: black;
-  border-radius: 40px;
-  animation-name: go-down-sec;
-  animation-duration: 0.8s;
-  /* opacity: 0.8; */
-  /* z-index: 1; */
-}
-
-
-.food-cart-container .container-1.hide{
-  position: fixed;
-  left:-1000%;
-}
 .hide{
   position: fixed;
   left:-1000%;

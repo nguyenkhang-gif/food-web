@@ -1,0 +1,156 @@
+*{
+    padding: 0;
+}
+
+
+.container-checkoutpage{
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    /* min-width: 80vw; */
+    max-width: 600px;
+    min-width: 400px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #EDEDED;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.container-checkoutpage .header .close-icon{
+    font-size: 20px;
+    cursor: pointer;
+}
+.container-checkoutpage .header{
+    /* margin-top: 10px;     */
+    text-align: left;
+    padding-left: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.container-checkoutpage .header p{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+
+.container-checkoutpage .main{
+    flex: 1;
+}
+
+.container-checkoutpage .main .title{
+    text-align: left;
+    font-size: 17px;
+    font-weight: 650;
+    padding-left: 20px;
+}
+.address-container{
+    position: relative;
+}
+
+.address-container .Name-address-phonnum ,
+.Delivery-pickup-container .Delivery-pickup {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    background-color: aliceblue;
+    min-height: 170px;
+    margin: 20px;
+    margin-top: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: center;
+    /* align-items: center; */
+    border-radius: 20px;
+}
+
+.address-container .Name-address-phonnum p{
+    padding-top: 20px;
+    flex: 1;
+    padding-left: 10px;
+}
+.address-container .Name-address-phonnum .Name,
+.address-container .Name-address-phonnum .Address,
+.Delivery-pickup .delivery
+{
+    border-bottom: 0.5px solid #000000;
+}
+
+.address-container .title,
+.address-container .change{
+    position: absolute;
+    cursor: pointer;
+}
+.address-container .title{
+    left: 15px;
+    top:-25px;
+}
+.address-container .change{
+    right:25px;
+    top:-25px;
+    color: #FA4A0C;
+}
+
+
+.Delivery-pickup-container .Delivery-pickup {
+    min-height: 100px;
+}
+
+.Delivery-pickup{
+    margin: 10px;
+    padding-left: 10px;
+}
+
+.Delivery-pickup p{
+    padding: 10px ;
+}
+
+
+.container-checkoutpage .main .button-next-container p{
+    cursor: pointer;
+}
+.container-checkoutpage .main .button-next-container{
+    margin-top: 10px;
+
+}
+.container-checkoutpage .main .total{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+
+
+.Name-address-phonnum .Cart input,
+.Name-address-phonnum .Cash input{
+    height: 20px;
+    width: 20px;
+   
+    /* padding: 0; */
+    flex: 0;
+}
+.Name-address-phonnum .Cart ,
+.Name-address-phonnum .Cash {
+    display: flex;
+    justify-content: center;
+    padding-right: 20px;
+    align-items: center;
+    padding: 20px;
+    flex: 1;
+    padding-left: 10px;
+}
+.Name-address-phonnum .Cart p,
+.Name-address-phonnum .Cash p{
+    display: flex;
+    justify-content: center;
+    padding-right: 20px;
+    align-items: center;
+    padding: 20px;
+    flex: 1;
+    padding-left: 10px;
+    font-size: 20px;
+}

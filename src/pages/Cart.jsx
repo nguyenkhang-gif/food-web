@@ -7,59 +7,56 @@ import { AiFillCloseCircle, AiFillCreditCard } from 'react-icons/ai'
 import { BiStoreAlt } from 'react-icons/bi'
 import { FaStoreAlt } from 'react-icons/fa'
 import { TbTruckDelivery } from 'react-icons/tb'
+import {productsData,allcartitem} from '../db.js'
+import CheckoutPage from './CheckoutPage'
 
 const Cart = () => {
 
-  const data = [
-    {
-      ID: 1,//user ID
-      itemID: 1,//Item ID sản phẩm
-      amount: 2,//Item số lượng
+  const [mainData,setMainData]= useState([])
 
+  // sử lý lấy thông tin từ cart để render
+    const getimgurlwithID = (ID) => {
+        let temp
+        productsData.forEach(item => {
+            if (item.id == ID) {
+                temp = item.imgurl
+            }
+        })
+        return temp
     }
-  ]
+    const getNameWithID = (ID) => {
+        let temp
+        productsData.forEach(item => {
+            if (item.id == ID) {
+                temp = item.Name
+            }
+        })
+        return temp
+    }
+    const getPriceWithID = (ID) => {
+        let temp
+        productsData.forEach(item => {
+            if (item.id == ID) {
+                temp = item.Price
+            }
+        })
+        return temp
+    }
+    const getTotalPRice = ()=>{
+        let final=0
+        mainData.forEach(item=>{
+            final+=getPriceWithID(item.itemID)*item.amount
+        })
+        return final
+    }
+  
   // lấy từ db
-  let Data = [
-    {
-      id: 1,
-      name: 'food_name 1',
-      amount: 1,
-      price: '9000',
-      imgurl: '../assets/food_img/hambuger.png'
-    },
-    {
-      id: 2,
-      price: '9000',
-      amount: 1,
-      name: 'food_name 2',
-      imgurl: '../assets/food_img/hambuger.png'
-    },
-    {
-      id: 3,
-      name: 'food_name 1',
-      amount: 1,
-      price: '9000',
-      imgurl: '../assets/food_img/hambuger.png'
-    },
-    {
-      id: 4,
-      name: 'food_name 1',
-      amount: 1,
-      price: '9000',
-      imgurl: '../assets/food_img/hambuger.png'
-    },
-    {
-      id: 5,
-      name: 'food_name 1',
-      amount: 1,
-      price: '9000',
-      imgurl: '../assets/food_img/hambuger.png'
-    },
-  ]
+ 
 
   const [dataMain,setDataMain]= useState([])
   useState(()=>{
-    setDataMain(Data)
+    setMainData(allcartitem)
+    console.log(allcartitem)
   },[])
   const [openCheckoutOption, setOpenCheckoutOption] = useState(false)
 
@@ -71,22 +68,28 @@ const Cart = () => {
 
   // sử lý cộng số lượng cho item
   const handleeditamount = (methos, ID) => {
-    console.log(dataMain)
+    // console.log(dataMain)
     if (methos == '+') {
-      dataMain.forEach((item,index)=>{
-        if(item.id==ID){
-          let tempArray=[...dataMain]
-          tempArray[index].amount+=1
-          setDataMain(tempArray)
+      mainData.forEach((item,index)=>{
+        if(item.itemID==ID){
+          let tempArray=[...mainData]
+          if(tempArray[index].amount<10){
+            tempArray[index].amount+=1
+            setMainData(tempArray)
+          }else {
+            alert('chỉ được đặt 1 món tối đa 10 món nếu nhiều hơn xin hãy gọi cho hot line bên dưới ')
+          }
         }
       })
     }
     if (methos == '-') {
-      dataMain.forEach((item,index)=>{
-        if(item.id==ID){
-          let tempArray=[...dataMain]
-          tempArray[index].amount-=1
-          setDataMain(tempArray)
+      mainData.forEach((item,index)=>{
+        if(item.itemID==ID){
+          let tempArray=[...mainData]
+          if(tempArray[index].amount>0){
+            tempArray[index].amount-=1
+            setMainData(tempArray)
+          }
         }
       })
     }
@@ -98,18 +101,18 @@ const Cart = () => {
 return (
   <div className='food-cart-container'>
     <div className="all-items-in-cart">
-      {dataMain?.map((item) => {
+      {mainData?.map((item) => {
         return (
           <div className="food-cart-item-container">
-            <FoodItem id={item.id} key={item.id} price={item.price} imgurl={item.imgurl} name={item.name} />
+            <FoodItem id={item.itemID} key={item.itemID}  imgurl={getimgurlwithID(item.itemID)} name={getNameWithID(item.itemID)} />
             <div className="amount-item-container">
               <p>số lượng</p>
-              <p className='btn-plus' onClick={() => { handleeditamount('+',item.id) }}>+</p>
-              <input type='number' onChange={(e) => {}} value={item.amount}/>
-              <p className='btn-minus' onClick={() => { handleeditamount('-',item.id) }}>-</p>
+              <p className='btn-plus' onClick={() => { handleeditamount('+',item.itemID) }}>+</p>
+              <input type='number'  value={item.amount}/>
+              <p className='btn-minus' onClick={() => { handleeditamount('-',item.itemID) }}>-</p>
             </div>
-            <span>giá:{Number(item.price)}</span>
-            <input type="checkbox" />
+            <span>giá:{getPriceWithID(item.itemID)}</span>
+          
             <button className='delete-btn' onClick={() => { alert('xử lý xóa item') }}>xóa</button>
             {/* span để chưa số lượng sản phẩm */}
           </div>
@@ -117,7 +120,7 @@ return (
       })}
     </div>
     <div className="total-price-container">
-      <p>tổng tiền:</p>
+      <p>tổng tiền: {getTotalPRice()} đ</p>
       <div className="container-checkout-payment-type">
         <button className='delete-btn' onClick={() => { alert('xử lý thanh toán item'); setOpenCheckoutOption(true) }}>thanh toán</button>
       </div>
@@ -130,24 +133,7 @@ return (
     {/* div  phương thức thanh toán  */}
     {openCheckoutOption ?
       <div className="container-1">
-        <p className='title'>Chọn phương thức thanh toán</p>
-        <AiFillCloseCircle className='icon-close' onClick={() => { alert('xử lý out'); setOpenCheckoutOption(false) }} />
-        <div className="con-at-store">
-          <input type="checkbox" name='at-store' key={1} onChange={() => { setChoseTakeoutDelivery([true, false]) }} checked={choseTakeoutDelivery[0]} />
-          <p>thanh toán thẻ </p>
-          <AiFillCreditCard className='icon' />
-        </div>
-        <div className="con-at-deliver">
-          <input type="checkbox" key={2} onChange={() => { setChoseTakeoutDelivery([false, true,false]) }} checked={choseTakeoutDelivery[1]} />
-          <p>thanh toán tại cửa hàng</p>
-          <FaStoreAlt className='icon' />
-        </div>
-        <div className="con-at-deliver">
-          <input type="checkbox" key={2} onChange={() => { setChoseTakeoutDelivery([false,false, true]) }} checked={choseTakeoutDelivery[2]} />
-          <p>giao hàng</p>
-          <TbTruckDelivery className='icon' />
-        </div>
-        <button >Xác nhận</button>
+       <CheckoutPage total={getTotalPRice()} closeTab={()=>{setOpenCheckoutOption(false)}}/>
       </div>
       : null}
     {/* end of phương thức thanh toán */}

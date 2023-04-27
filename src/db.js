@@ -43,14 +43,24 @@ export const alluserAdress = [
 
 
 
-export const alluserOrders =[
+export const allcartitem = [
     {
-        ID:1,
-        ProDuctID:1,
+        ID:1,//người mua 
+        itemID:1,//item của người mua
+        amount:1//số lượng
+    },
+    {
+        ID:1,//người mua 
+        itemID:3,//item của người mua
+        amount:5//số lượng
+    },
+    {
+        ID:1,//người mua 
+        itemID:4,//item của người mua
+        amount:2//số lượng
+    },
 
-    }
 ]
-
 
 export const productsData = [
     {
