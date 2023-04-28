@@ -4,7 +4,19 @@ export const userInfo=[
         Name:"Nguyên Khang",
         email:'nguyennguyenkhang915@gmail.com',
         PhoneNum:'0902932998'
-    }
+    },
+    {
+        ID:2,
+        Name:"Nguyên Khang 2",
+        email:'nguyennguyenkhang915@gmail.com',
+        PhoneNum:'0902932998'
+    },
+    {
+        ID:3,
+        Name:"Nguyên Khang 3",
+        email:'nguyennguyenkhang915@gmail.com',
+        PhoneNum:'0902932998'
+    },
 ]
     
 
@@ -177,5 +189,35 @@ export const productsData = [
     }, 
     
 
+
+]
+
+
+//  tất cả đánh giá 
+export const allComment =[
+    {
+        userID:1,
+        des:'ăn rất ngol or sthng.....',
+        productID:1,
+        rating:3
+    },
+    {
+        userID:2,
+        des:'ăn rất ngol or sthng.....',
+        productID:1,
+        rating:3
+    },
+    {
+        userID:3,
+        des:'ăn rất ngol or sthng.....',
+        productID:1,
+        rating:3
+    },
+    {
+        userID:1,
+        des:'ăn rất ngol or sthng.....',
+        productID:1,
+        rating:3
+    },
 
 ]

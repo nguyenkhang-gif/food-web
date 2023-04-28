@@ -15,6 +15,8 @@ const CheckoutPage = ({ mainData, total, closeTab }) => {
 
     // sử lý thay đổi option ở phương thức nhận hàng (món ăn)
     const [pickUpDoorDeliver, setPickUpDoorDeliver] = useState([true, false])
+    // sử lý thay đổi option ở phương thức thanh toán(món ăn)
+    const [creditCash, setCreditCash] = useState([true, false])
     // sử lý lấy địa chỉ đầu tiên
     const getAddressWithID = (ID) => {
         let temp
@@ -80,13 +82,13 @@ const CheckoutPage = ({ mainData, total, closeTab }) => {
                         {/* user name address phone Num */}
                         {user ? <div className="Name-address-phonnum">
                             <p className='Cart'>
-                                <input type="checkbox" />
+                                <input type="checkbox" checked={creditCash[0]} onChange={()=>setCreditCash([true,false])} />
                                 <p>Thẻ ngân hàng</p>
                                 <AiFillCreditCard className='credit-card-icon' />
                             </p>
                             {/* <p className='Address'>{getAddressWithID(user[0].ID)}</p> */}
                             <p className='Cash'>
-                                <input type="checkbox" />
+                                <input type="checkbox" checked={creditCash[1]} onChange={()=>setCreditCash([false,true])} />
                                 <p> Tiền mặt </p>
                                 <BsCash className='cash-icon' />
                             </p>

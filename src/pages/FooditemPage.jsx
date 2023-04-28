@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { AiFillCreditCard, AiOutlineCloseCircle, AiOutlineStar, AiFillStar } from 'react-icons/ai'
 import '../styles/FooditemPage.css'
-import { productsData } from '../db.js'
+import { allComment, productsData } from '../db.js'
+
 
 const DATA = [
     {
@@ -31,7 +33,15 @@ const FooditemPage = () => {
     const pathID = window.location.pathname
     const [foodInfo, setFoodInfo] = useState()
     const [foodNamePrice, setFoodNamePrice] = useState()
-    const [allComments,setAllComment]= useState([])
+    const [allComments, setAllComment] = useState([])
+
+
+
+    // sử lý vẽ ngôi sao 
+
+    const [allstar, setAllStar] = useState([1, 2, 3, 4, 5])
+    const [tempRate, setTempRate] = useState(3)
+
     useEffect(() => {
         DATA.forEach(item => {
             if (pathID.split('/')[2] == item.id) setFoodInfo(item);
@@ -64,21 +74,51 @@ const FooditemPage = () => {
                 </div>
                 {/* end of left nav */}
                 {/* right nav */}
-                {foodInfo?<div className="right-nav-container">
+                {foodInfo ? <div className="right-nav-container">
                     <p className='header'>mô tả món ăn</p>
                     <p>{foodInfo.deliveryInfo}</p>
                     <p className='header'>Chính sách hoàn tiền</p>
                     <p>Hoàn tiền 100% nếu món ăn giao đến không đạt chất lượng hoặc không giống với hình </p>
-                </div>:null}
+                </div> : null}
 
                 {/* end of right nav */}
             </div>
             {/* comment container */}
-            <div className="comment-container">
+            <div className="comment-container" style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
                 {/* title */}
                 <p className='title'>Đánh giá</p>
+                <div style={{ flex: 1, marginLeft: 20, marginRight: 20 }}>
+                    {/* 1 comment component */}
+                    <div className="" style={{ display: 'flex', flexDirection: 'row' }}>
+                        <div style={{ height: '40px', width: '40px', borderRadius: '20px', overflow: 'hidden' }}>
+                            <img src={require('../assets/profile.jpg')} alt="" style={{ height: '40px' }} />
+                        </div>
+                        <div style={{ flex: 1, display: 'flex', textAlign: 'left', alignItems: 'left', flexDirection: 'column', marginLeft: '10px' }}>
+                            <p style={{ fontSize: '20px', margin: '5px', fontWeight: '600' }}>user name</p>
+                            {/* sử lý vẽ ngôi sao  */}
+                            <div style={{ marginLeft: 5 }}>
+                                {allstar.map(item => {
+                                    if (item <= 3) {
+                                        return (
+                                            <AiFillStar />
+                                        )
+                                    } else {
+                                        return (
+                                            <AiOutlineStar />
+                                        )
+                                    }
+                                })}
+                            </div>
+                            {/* end of sử lý vẽ ngôi sao  */}
+                            <div style={{ marginLeft: '5px' }}>
+                                <p>đánh giá sản phẩm </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 {/* end of title */}
             </div>
+
             {/*  end of comment container */}
         </div>
     )
