@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/Userprofile.css'
 import { userInfo, alluserAdress } from '../db.js'
+import { Link } from 'react-router-dom'
 const Userprofile = () => {
   const [userDes, setUserDes] = useState()
 
@@ -123,13 +124,15 @@ const Userprofile = () => {
                       {userAdress ?
                         userAdress.map((item) => {
                           return (
-                            <div className="item-user-adress">
-                              <p>Tên món</p>
-                              <p>1</p>
-                              <p>chuẩn bị</p>
-                              <p><button onClick={() => { alert(`handle xóa địa chỉ có ID = ${item.ID}`) }}>Hủy</button></p>
-                              
-                            </div>)
+                            <Link style={{textDecoration:'none',color:'black'}} to={`/fooditem/${item.ID}`}>
+                              <div className="item-user-adress" style={{ cursor: 'pointer' }}>
+                                <p>Tên món</p>
+                                <p>1</p>
+                                <p>chuẩn bị</p>
+                                <p><button onClick={() => { alert(`handle xóa địa chỉ có ID = ${item.ID}`); }}>Hủy</button></p>
+                              </div>
+                            </Link>
+                          )
                         }) : null
                       }
                     </div>

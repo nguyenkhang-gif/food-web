@@ -5,7 +5,8 @@ import homepagebg from '../assets/homepagebg.png'
 import FoodItem from '../component/FoodItem'
 import { FiSearch } from 'react-icons/fi'
 import { productsData } from '../db.js'
-
+import axios from 'axios'
+import { getAllProduct } from '../apicalls.js'
 const Data = [
     {
         id: 1,
@@ -40,10 +41,63 @@ const Data = [
 ]
 
 const Home = () => {
-    const [allproduct,setAllProduct]= useState([])
-    useEffect(()=>{
-        setAllProduct(productsData)
-    },[])
+
+
+
+
+    // all calls
+    // const callapi = async ([data,setdata]) => {
+    //     // let final
+    //     try{
+    //         axios.get(`http://localhost/food-app-api/product/read.php`)
+    //         .then((res) => {
+    //             console.log(res.data)
+    //             setdata(res.data)
+    //         })
+    //     }catch(err){
+    
+    //     }
+    //     // return final
+    // }
+
+
+
+
+
+    const [allproduct, setAllProduct] = useState([])
+    
+    const [tempTEst,setTempTest]= useState('shti')
+    // const callapi = async () => {
+    //     try{
+
+    //         axios.post(`http://localhost/food-app-api/test.php`,{content:'nguyen',dcontent:1})
+    //         .then((res) => {
+    //             console.log(res.data)
+    //         })
+    //     }catch(err){
+
+    //     }
+            
+    // }
+    const getimurlwithID = (ID)=>{
+        let temp 
+        productsData.forEach(item =>{
+            if(item.id==ID){
+                temp=item.imgurl
+            }
+        })
+        return temp
+    }
+
+
+    useEffect(() => {
+        // setAllProduct(productsData)
+       
+        getAllProduct([allproduct,setAllProduct])
+        
+        // temp.forEach(item=>{console.log(item)})
+        // setAllProducts
+    }, [])
     return (
         <div className='home-main-container'>
             <div className="intro-container" >
@@ -70,7 +124,7 @@ const Home = () => {
 
             <div className="food-item-container">
                 {allproduct.map((item) => {
-                    return (<FoodItem id={item.id} key={item.id} price={item.Price} imgurl={item.imgurl} name={item.Name} />)
+                    return (<FoodItem id={item.ID} key={item.ID} price={item.price} imgurl={getimurlwithID(item.ID)} name={item.Name} />)
                 })}
             </div>
         </div>
