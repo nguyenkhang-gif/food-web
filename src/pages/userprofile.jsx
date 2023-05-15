@@ -3,11 +3,13 @@ import '../styles/Userprofile.css'
 import { userInfo, alluserAdress } from '../db.js'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authcontext'
+import { getOrder, updateUserInfo } from '../apicalls'
+import OrderDetail from '../component/orderDetails'
 const Userprofile = () => {
   const [userDes, setUserDes] = useState()
-  const { curentUser } = useContext(AuthContext)
+  const { curentUser, refresh, setCurentUser, OrderRefresh } = useContext(AuthContext)
   //ví dụ vè user ID
-  const ID = 1
+  const ID = curentUser
   // xử lý nhấn các option trong menu 
   const [menuNavBar, setMenuNavBar] = useState([])
   // sử lý render all địa chỉ của người dùng hiện tại 
@@ -24,12 +26,55 @@ const Userprofile = () => {
   }
 
 
+
+  // user
+  const [Name, setName] = useState('')
+  const [userName, setUserName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [phonenumber, setPhonenum] = useState('')
+  const [address, setAddress] = useState('')
+
   useEffect(() => {
     setMenuNavBar([false, false, true])
-    setUserDes(userInfo)
-    getalluseradress()
-    console.log(alluserAdress);
+    // setUserDes(userInfo)
+    // getalluseradress()
+    // console.log(alluserAdress);
   }, [])
+
+  useEffect(() => {
+    if (curentUser) {
+
+      setName(curentUser[0].Name)
+      setUserName(curentUser[0].Username)
+      setEmail(curentUser[0].Email)
+      setPassword(curentUser[0].Password)
+      setPhonenum(curentUser[0].phonDes)
+      setAddress(curentUser[0].addressDes)
+    }
+    // setIsLoadData(false)
+    // setPhonenumberArray([])
+  }, [curentUser, refresh])
+
+
+  // orders details 
+  const [orderID, setOrderID] = useState()
+
+  // user orders
+
+
+  const [mainData, setMainData] = useState([])
+
+  useEffect(() => {
+    if (curentUser) {
+      getOrder(curentUser[0].id, [mainData, setMainData])
+    }
+    console.log(mainData)
+  }, [
+    curentUser,
+    refresh,
+    // OrderRefresh
+  ])
   return (
     curentUser ?
       <div className='container-userprofile'>
@@ -66,12 +111,28 @@ const Userprofile = () => {
               </div>
               <div className="user-info">
                 <div className="container-user-info">
-                  <p>Tên: {curentUser[0].Name}</p>
-                  <p>Email: {curentUser[0].Email}</p>
-                  <p>Số điện thoại: {curentUser[0].phonDes}</p>
+                  <p>Tên:
+                    <input style={{ height: 30, marginLeft: 20 }} type="text" value={Name ? Name : null} onChange={(e) => { setName(e.target.value) }} />
+                  </p>
+                  <p>Email:
+                    <input style={{ height: 30, marginLeft: 20 }} type="text" value={email ? email : null} onChange={(e) => { setEmail(e.target.value) }} />
+                  </p>
+                  <p>Mật khẩu:
+                    <input style={{ height: 30, marginLeft: 20 }} type="password" value={password ? password : null} onChange={(e) => { setName(e.target.value) }} />
+                  </p>
+                  <p>Số điện thoại:
+                    <input style={{ height: 30, marginLeft: 20 }} type="text" value={phonenumber ? phonenumber : null} onChange={(e) => { setPhonenum(e.target.value) }} />
+                  </p>
 
-                  <p>Địa chỉ: {curentUser[0].addressDes}</p>
-                  <button>cập nhật</button>
+                  <p>Địa chỉ:
+                    <input style={{ height: 30, marginLeft: 20, width: '100%', maxWidth: 500 }} type="text" value={address ? address : null} onChange={(e) => { setAddress(e.target.value) }} />
+                  </p>
+                  <button
+                    onClick={() => {
+                      updateUserInfo({ Name, userName, userName, email, password, phonenumber, address, id: curentUser[0].id });
+                      setCurentUser([{ Email: email, Name: Name, Password: password, Username: userName, phonDes: phonenumber, addressDes: address, id: curentUser[0].id, }])
+                    }}
+                  >cập nhật</button>
                 </div>
               </div>
             </div>
@@ -85,8 +146,8 @@ const Userprofile = () => {
                 <div className="user-info">
                   <div className="container-user-info">
                     {/* add header */}
-                    <div className="container-order-top-bar">
-                      <p>Mã đơn</p>
+                    <div style={{ display: 'flex', marginTop: 20 }}>
+                      <p >Mã đơn</p>
                       <p>tổng tiền</p>
                       <p>Trong giai đoạn</p>
                       {/* <p>hủy</p> */}
@@ -94,25 +155,28 @@ const Userprofile = () => {
                     {/* end of add address */}
                     {/* container all orders */}
                     <div className="container-user-adress">
-                      {userAdress ?
-                        userAdress.map((item) => {
+                      {mainData ?
+                        mainData.map((item) => {
                           return (
-                            <Link style={{ textDecoration: 'none', color: 'black' }} to={`/fooditem/${item.ID}`}>
+                            <Link style={{ textDecoration: 'none', color: 'black' }}
+                              // to={`/fooditem/${item.ID}`}
+                              onClick={() => { setMenuNavBar([false, true, false]); setOrderID(item) }}
+                            >
                               <div className="item-user-adress" style={{ cursor: 'pointer' }}>
-                                <p>Tên món</p>
-                                <p>1</p>
-                                <p style={{ backgroundColor: 'blue', alignContent: 'center' }}>chuẩn bị</p>
+                                <p>{item.ID}</p>
+                                <p style={{ fontSize: 16, fontWeight: '500', color: '#FA4A0C' }}>{item.Total}đ</p>
+                                <p style={{}}>{item.status}</p>
                                 {/* <p><button onClick={() => { alert(`handle xóa địa chỉ có ID = ${item.ID}`); }}>Hủy</button></p> */}
                               </div>
                             </Link>
                           )
-                        }) : null
+                        }) :null
                       }
                     </div>
                     {/* end of container all orders */}
                   </div>
                 </div>
-              </div> : null}
+              </div> : menuNavBar[1]?<OrderDetail data={orderID}/>:null}
         </div>
 
         {/* end of right nav */}

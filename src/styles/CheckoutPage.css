@@ -53,6 +53,7 @@
 .address-container .Name-address-phonnum ,
 .Delivery-pickup-container .Delivery-pickup {
     text-align: left;
+    
     display: flex;
     flex-direction: column;
     background-color: aliceblue;
@@ -145,6 +146,7 @@
 }
 .Name-address-phonnum .Cart p,
 .Name-address-phonnum .Cash p{
+    height: fit-content;
     display: flex;
     justify-content: center;
     padding-right: 20px;

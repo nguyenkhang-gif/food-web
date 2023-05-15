@@ -129,7 +129,9 @@ const Cart = () => {
     getCart(curentUser[0].id, [mainData, setMainData])
     setRefresh(!refresh)
   }
-
+  const reloadPage = () => {
+    window.location.reload()
+  }
 
 
 
@@ -139,7 +141,7 @@ const Cart = () => {
         <div className="all-items-in-cart">
           {mainData?.map((item) => {
             return (
-              <div className="food-cart-item-container">
+              <div className="food-cart-item-container" style={{ backgroundColor: 'white', margin: 20, borderRadius: 20 }}>
                 <FoodItem id={item.itemID} key={item.itemID} imgurl={getimgurlwithID(item.itemID)} name={getNameWithID(item.itemID)} />
                 <div className="amount-item-container">
                   <p>số lượng</p>
@@ -149,7 +151,7 @@ const Cart = () => {
                 </div>
                 <span>giá:{getPriceWithID(item.itemID)}</span>
 
-                <button className='delete-btn' onClick={() => { alert('xử lý xóa item'); handleDelete(item.itemID) }}>xóa</button>
+                <button className='delete-btn' onClick={() => { alert('xử lý xóa item'); handleDelete(item.itemID); reloadPage() }}>xóa</button>
                 {/* span để chưa số lượng sản phẩm */}
               </div>
             )
@@ -159,9 +161,9 @@ const Cart = () => {
           <p>tổng tiền: {getTotalPRice()} đ</p>
           <div className="container-checkout-payment-type">
             <button className='delete-btn' onClick={() => {
-              if(getTotalPRice()==0){
+              if (getTotalPRice() == 0) {
                 alert('chưa có món nào để thanh toán')
-              }else{
+              } else {
 
                 setOpenCheckoutOption(true); console.log(mainData)
               }
@@ -176,7 +178,7 @@ const Cart = () => {
         {/* div  phương thức thanh toán  */}
         {openCheckoutOption ?
           <div className="container-1">
-            <CheckoutPage total={getTotalPRice()} closeTab={() => { setOpenCheckoutOption(false) }} />
+            <CheckoutPage total={getTotalPRice()} data={mainData} closeTab={() => { setOpenCheckoutOption(false) }} />
           </div>
           : null}
         {/* end of phương thức thanh toán */}

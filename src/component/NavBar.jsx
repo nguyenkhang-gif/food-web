@@ -77,9 +77,11 @@ const NavBar = () => {
         </Link>
       </div >
       {isHoverUserIcon && curentUser ? <div className="container-profile" >
-        <p className='user-name'>{curentUser && curentUser[0].Name}</p>
+        <p className='user-name'>@{curentUser && curentUser[0].Name}</p>
+        {/* <p className='user-name'>@{curentUser && curentUser[0].userName}</p> */}
         <p className='user-email'>{curentUser && curentUser[0].Email}</p>
         <p className='user-phonenum'>{curentUser && curentUser[0].phonDes}</p>
+
       </div> : null}
       <div className="menu-container">
 

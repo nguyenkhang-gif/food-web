@@ -3,12 +3,20 @@ import '../styles/CheckoutPage.css'
 import { userInfo, alluserAdress } from '../db.js'
 import { AiFillCreditCard, AiOutlineCloseCircle } from 'react-icons/ai'
 import { BsCash } from 'react-icons/bs'
-const CheckoutPage = ({ mainData, total, closeTab }) => {
+import { useContext } from 'react'
+import { AuthContext } from '../context/authcontext'
+import { createOrder, deleteCart } from '../apicalls'
+const CheckoutPage = ({ mainData, total, closeTab, data }) => {
+
+    const { curentUser, refresh, setRefresh, OrderRefresh } = useContext(AuthContext)
     const [user, setUser] = useState()
     useEffect(() => {
         setUser(userInfo)
 
     }, [])
+    useEffect(() => {
+        console.log('data: ', data)
+    }, [data])
 
     // sử lý tới công đoạn tiếp theo trong check out ví dụ tới paymend or sth
     const [toPayMent, setToPayment] = useState(false)
@@ -29,23 +37,36 @@ const CheckoutPage = ({ mainData, total, closeTab }) => {
         return temp
     }
 
+
+
+    const clearCart=()=>{
+        data.forEach(item=>{
+            deleteCart(curentUser[0].id,item.itemID)
+        })
+    }
+
+    const reloadPage=()=>{
+        window.location.reload()
+    }
+    
+
     return (
         <div className='container-checkoutpage'>
             <div className="header">
-                <p>{toPayMent ? 'Thanh toán' : 'Check out'}</p>
+                <p> Check out</p>
                 <AiOutlineCloseCircle className='close-icon' onClick={() => { closeTab() }} />
             </div>
 
-            {!toPayMent ? <div className="main">
+            <div className="main">
                 <p className='title'>Delivery</p>
                 <div className="address-container">
                     <p className='title'>Address details</p>
                     <p className='change'>change</p>
                     {/* user name address phone Num */}
                     {user ? <div className="Name-address-phonnum">
-                        <p className='Name'>{user[0].Name}</p>
-                        <p className='Address'>{getAddressWithID(user[0].ID)}</p>
-                        <p className='Phonenum'>{user[0].PhoneNum}</p>
+                        <p className='Name'>{curentUser?.[0].Name}</p>
+                        <p className='Address' style={{ height: 'fit-content' }}>{curentUser?.[0].addressDes}</p>
+                        <p className='Phonenum'>{curentUser?.[0].phonDes}</p>
                     </div> : null}
                 </div>
                 <p className='title'>Delivery method</p>
@@ -72,55 +93,17 @@ const CheckoutPage = ({ mainData, total, closeTab }) => {
                     </div>
                     : null}
                 <div className="button-next-container">
-                    <button onClick={() => { setToPayment(true) }}>Tiếp theo</button>
+                    <button onClick={() => {
+                        console.log(`create order :${JSON.stringify(data)} and total: ${total}`);
+                        createOrder(curentUser[0].id, curentUser[0].addressDes, curentUser[0].phonDes, 'on Going', '', JSON.stringify(data), total);
+                        clearCart()
+                        setRefresh(!refresh)
+                        alert('đặt thành công bạn có thể vào phần orders để check tiến độ')
+                        reloadPage()
+                        // navigation.navigate('homescreen')
+                    }}>Xác nhận</button>
                 </div>
-            </div> :
-                // payment section
-                <div className="main">
-                    <div className="address-container">
-                        <p className='title'>Phương thức thanh toán</p>
-                        {/* user name address phone Num */}
-                        {user ? <div className="Name-address-phonnum">
-                            <p className='Cart'>
-                                <input type="checkbox" checked={creditCash[0]} onChange={()=>setCreditCash([true,false])} />
-                                <p>Thẻ ngân hàng</p>
-                                <AiFillCreditCard className='credit-card-icon' />
-                            </p>
-                            {/* <p className='Address'>{getAddressWithID(user[0].ID)}</p> */}
-                            <p className='Cash'>
-                                <input type="checkbox" checked={creditCash[1]} onChange={()=>setCreditCash([false,true])} />
-                                <p> Tiền mặt </p>
-                                <BsCash className='cash-icon' />
-                            </p>
-                        </div> : null}
-                    </div>
-                    <p className='title'>Delivery method</p>
-                    <div className="Delivery-pickup-container">
-
-                        {user ? <div className="Delivery-pickup">
-                            <p className='delivery'>
-                                <input type="checkbox" checked={pickUpDoorDeliver[0]} onChange={() => { setPickUpDoorDeliver([true, false]) }} />
-                                Giao hàng
-                            </p>
-                            <p className='pick-up'>
-                                <input type="checkbox" checked={pickUpDoorDeliver[1]} onChange={() => { setPickUpDoorDeliver([false, true]) }} />
-                                Nhận tại quán
-                            </p>
-                        </div> : null}
-                    </div>
-                    {/* total container */}
-                    {total ?
-                        <div className="total">
-                            <p>Total: </p>
-                            <p>{total}đ</p>
-                        </div>
-                        : null}
-                    <div className="button-next-container">
-                        <button onClick={() => { alert('handle sử lý đơn') }}>Xác nhận</button>
-                        <p onClick={() => { setToPayment(false) }}>quay về</p>
-                    </div>
-                </div>
-            }
+            </div>
         </div>
     )
 }
