@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import '../styles/Home.css'
 // import '../assets/food_img/hambuger.png'
 import homepagebg from '../assets/homepagebg.png'
@@ -7,6 +7,7 @@ import { FiSearch } from 'react-icons/fi'
 import { productsData } from '../db.js'
 import axios from 'axios'
 import { getAllProduct } from '../apicalls.js'
+import { AuthContext } from '../context/authcontext'
 const Data = [
     {
         id: 1,
@@ -42,8 +43,10 @@ const Data = [
 
 const Home = () => {
 
-
-
+    const {curentUser} = useContext(AuthContext)
+    useEffect(()=>{
+        console.log(curentUser?'there is user':'there are no user')
+    },[])
 
     // all calls
     // const callapi = async ([data,setdata]) => {
@@ -66,7 +69,7 @@ const Home = () => {
 
     const [allproduct, setAllProduct] = useState([])
     
-    const [tempTEst,setTempTest]= useState('shti')
+    // const [tempTEst,setTempTest]= useState('shti')
     // const callapi = async () => {
     //     try{
 

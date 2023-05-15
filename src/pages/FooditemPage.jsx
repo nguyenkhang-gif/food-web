@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { AiFillCreditCard, AiOutlineCloseCircle, AiOutlineStar, AiFillStar } from 'react-icons/ai'
 import '../styles/FooditemPage.css'
 import { allComment, productsData } from '../db.js'
-import { getAllProduct } from '../apicalls'
+import { createCart, getAllProduct, getCart, updateCart } from '../apicalls'
+import { AuthContext } from '../context/authcontext'
 
 
 const DATA = [
@@ -35,16 +36,21 @@ const FooditemPage = () => {
     const [foodInfo, setFoodInfo] = useState()
     const [foodNamePrice, setFoodNamePrice] = useState()
     const [allComments, setAllComment] = useState([])
-    const [mainData,setMainData] = useState([])
+    const [mainData, setMainData] = useState([])
 
+
+
+
+    // user
+    const {curentUser,setRefresh,refresh} = useContext(AuthContext)
 
     // sử lý vẽ ngôi sao 
 
-    const getimurlwithID = (ID)=>{
-        let temp 
-        productsData.forEach(item =>{
-            if(item.id==ID){
-                temp=item.imgurl
+    const getimurlwithID = (ID) => {
+        let temp
+        productsData.forEach(item => {
+            if (item.id == ID) {
+                temp = item.imgurl
             }
         })
         return temp
@@ -53,9 +59,9 @@ const FooditemPage = () => {
 
     const [allstar, setAllStar] = useState([1, 2, 3, 4, 5])
     const [tempRate, setTempRate] = useState(3)
-    useEffect(()=>{
-        getAllProduct([mainData,setMainData])
-    },[])
+    useEffect(() => {
+        getAllProduct([mainData, setMainData])
+    }, [])
 
     useEffect(() => {
         DATA.forEach(item => {
@@ -69,20 +75,62 @@ const FooditemPage = () => {
         console.log(pathID.split('/')[2])
     }, [mainData])
 
+    // handle thêm vào cart
+    // sử lý thêm vào giỏ hàng 
+    const [tempData, setTempData] = useState([])
+    useEffect(() => {
+        if (curentUser) {
+            getCart(curentUser[0].id, [tempData, setTempData])
+        }
+    }, [])
+    const handleAddCart = () => {
+        let ID = pathID.split('/')[2]
+        if (!curentUser) {
+            alert('bạn chưa đăng nhập')
+        } else {
+            // nếu chưa có sản phẩm trong cart 
+            if (!tempData.length) {
+                createCart(curentUser[0].id, ID)
+                // setTempData([{ID:curentUser[0].id,itemID:ID,amount:1}])
+                getCart(curentUser[0].id, [tempData, setTempData])
+                alert('thêm thành công')
+            }
+            if (tempData.length) {
+                let isInCart = false;
+                tempData.forEach(item => {
+                    if (item.itemID == ID) {
+                        console.log('update: ', item.amount + 1)
+                        updateCart(curentUser[0].id, ID, Number(item.amount) + 1)
+                        // getCart(curentUser[0].id,[tempData,setTempData])
+                        alert('đã thêm 1 sản phẩm cùng tên vào giỏ hàng')
+                        isInCart = true
+                    }
+                })
+                if (!isInCart) {
+                    createCart(curentUser[0].id, ID)
+                    alert('đã thêm 1 sản phẩm  vào giỏ hàng')
+                }
+                getCart(curentUser[0].id, [tempData, setTempData])
+            }
+        }
+        setRefresh(!refresh)
+    }
+
+
     return (
         <div className='fooditempage-main-container'>
             <div className="item-info-container">
                 {/* left nav */}
                 <div className="left-nav-container">
                     <div className="img-container">
-                        <img src={foodNamePrice? getimurlwithID(foodNamePrice.ID):null} alt="" />
+                        <img src={foodNamePrice ? getimurlwithID(foodNamePrice.ID) : null} alt="" />
                     </div>
                     {/* item name price and add to cart button container  */}
                     {foodNamePrice ?
                         <div className="container-name-price-addtocartbtn">
                             <p className='Name'>{foodNamePrice.Name}</p>
                             <p className='Price'>{foodNamePrice.price} đ</p>
-                            <button>thêm vào giỏ </button>
+                            <button onClick={()=>handleAddCart()}>thêm vào giỏ </button>
                         </div>
                         : null}
                     {/* end of  item name price and add to cart button container  */}
@@ -104,7 +152,7 @@ const FooditemPage = () => {
                 <p className='title'>Đánh giá</p>
                 <div style={{ flex: 1, marginLeft: 20, marginRight: 20 }}>
                     {/* 1 comment component */}
-                    <div className="" style={{ display: 'flex', flexDirection: 'row',marginBottom:'35px',backgroundColor:'#fff'}}>
+                    <div className="" style={{ display: 'flex', flexDirection: 'row', marginBottom: '35px', backgroundColor: '#fff' }}>
                         <div style={{ height: '40px', width: '40px', borderRadius: '20px', overflow: 'hidden' }}>
                             <img src={require('../assets/profile.jpg')} alt="" style={{ height: '40px' }} />
                         </div>

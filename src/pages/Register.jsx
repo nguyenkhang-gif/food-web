@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import  '../styles/Login.css'
 
 const Register = () => {
+    const [emailVal,setEmailVal] = useState([])
+    const [passwordVal,setPasswordVal] = useState([])
+    
+
+
   return (
     <section>
         <div class="form-box">
@@ -10,7 +15,7 @@ const Register = () => {
                     <h2>register</h2>
                     <div class="inputbox">
                         {/* <ion-icon name="mail-outline"></ion-icon> */}
-                        <input type="email" required/>
+                        <input type="email" required onChange={(e)=>{setEmailVal(e.target.value)}}/>
                         <label for="">Email</label>
                     </div>
                     <div class="inputbox">
@@ -23,14 +28,9 @@ const Register = () => {
                         <input type="password" required/>
                         <label for="">confirm password</label>
                     </div>
-                    <div class="forget">
-                        <label for=""><input type="checkbox"/>Remember Me  <a href="#">Forget Password</a></label>
-                      
-                    </div>
-                    <button>Log in</button>
-                    <div class="register">
-                        <p>Don't have a account <a href="#">Register</a></p>
-                    </div>
+                   
+                    <button onClick={()=>{console.log(emailVal)}}>register</button>
+                   
                 </form>
             </div>
         </div>
