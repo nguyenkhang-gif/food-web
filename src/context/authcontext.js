@@ -101,15 +101,15 @@ export const AuthContextProvider = ({ children }) => {
     // const refreshLoop = setInterval(()=>{
 
     // },1000)
-    useEffect(() => {
-        const interval = setInterval(() => {
-        //   console.log('This will run every second!');
-          setOrderRefresh(!OrderRefresh)
-        //   setRefresh(!refresh)
-        //   setRefresh(!refresh)
-        }, 1000);
-        return () => clearInterval(interval);
-      }, [OrderRefresh]);
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //     //   console.log('This will run every second!');
+    //       setOrderRefresh(!OrderRefresh)
+    //     //   setRefresh(!refresh)
+    //     //   setRefresh(!refresh)
+    //     }, 1000);
+    //     return () => clearInterval(interval);
+    //   }, [OrderRefresh]);
     //   useEffect(()=>{
     //     console.log("order refresh")
     //   },[OrderRefresh])

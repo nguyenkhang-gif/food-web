@@ -3,8 +3,9 @@ import '../styles/Userprofile.css'
 import { userInfo, alluserAdress } from '../db.js'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../context/authcontext'
-import { getOrder, updateUserInfo } from '../apicalls'
+import { getFav, getOrder, updateUserInfo } from '../apicalls'
 import OrderDetail from '../component/orderDetails'
+import { VNDFormat } from '../Funtions'
 const Userprofile = () => {
   const [userDes, setUserDes] = useState()
   const { curentUser, refresh, setCurentUser, OrderRefresh } = useContext(AuthContext)
@@ -36,7 +37,7 @@ const Userprofile = () => {
   const [address, setAddress] = useState('')
 
   useEffect(() => {
-    setMenuNavBar([false, false, true])
+    setMenuNavBar([true, false, false, false])
     // setUserDes(userInfo)
     // getalluseradress()
     // console.log(alluserAdress);
@@ -72,9 +73,18 @@ const Userprofile = () => {
     console.log(mainData)
   }, [
     curentUser,
-    refresh,
+    refresh
     // OrderRefresh
   ])
+
+
+
+  // sử lý Fav
+  const [allFav, setAllFav] = useState([])
+  useEffect(() => {
+      if (curentUser) { getFav(curentUser[0].id, [allFav, setAllFav]) }
+  }, [curentUser])
+
   return (
     curentUser ?
       <div className='container-userprofile'>
@@ -91,9 +101,11 @@ const Userprofile = () => {
           {/* user menu option  */}
           <div className="container-user-menu-option">
             <div className="menu-option-name" ><p>{curentUser[0].Name}</p> </div>
-            <div className="menu-option" onClick={() => { setMenuNavBar([true, false, false]) }}><p>Info</p> </div>
+            <div className="menu-option" onClick={() => { setMenuNavBar([true, false, false, false]) }}><p>Info</p> </div>
             {/* <div className="menu-option" onClick={() => { setMenuNavBar([false, true, false]) }}><p>Adress</p></div> */}
-            <div className="menu-option" onClick={() => { setMenuNavBar([false, false, true]) }}><p>Orders</p></div>
+            <div className="menu-option" onClick={() => { setMenuNavBar([false, false, true, false]) }}><p>Orders</p></div>
+            {/* <div className="menu-option" onClick={() => { setMenuNavBar([false, false, true]) }}><p>Orders</p></div> */}
+            <div className="menu-option" onClick={() => { setMenuNavBar([false, false, false, true]) }}><p>Fav</p></div>
           </div>
 
           {/* end of  user menu  */}
@@ -132,7 +144,7 @@ const Userprofile = () => {
                       updateUserInfo({ Name, userName, userName, email, password, phonenumber, address, id: curentUser[0].id });
                       setCurentUser([{ Email: email, Name: Name, Password: password, Username: userName, phonDes: phonenumber, addressDes: address, id: curentUser[0].id, }])
                     }}
-                  >cập nhật</button>
+                  >Cập nhật</button>
                 </div>
               </div>
             </div>
@@ -148,35 +160,64 @@ const Userprofile = () => {
                     {/* add header */}
                     <div style={{ display: 'flex', marginTop: 20 }}>
                       <p >Mã đơn</p>
-                      <p>tổng tiền</p>
+                      <p>Tổng tiền</p>
                       <p>Trong giai đoạn</p>
                       {/* <p>hủy</p> */}
                     </div>
                     {/* end of add address */}
-                    {/* container all orders */}
+
                     <div className="container-user-adress">
-                      {mainData ?
+                      {
                         mainData.map((item) => {
-                          return (
-                            <Link style={{ textDecoration: 'none', color: 'black' }}
-                              // to={`/fooditem/${item.ID}`}
-                              onClick={() => { setMenuNavBar([false, true, false]); setOrderID(item) }}
-                            >
-                              <div className="item-user-adress" style={{ cursor: 'pointer' }}>
-                                <p>{item.ID}</p>
-                                <p style={{ fontSize: 16, fontWeight: '500', color: '#FA4A0C' }}>{item.Total}đ</p>
-                                <p style={{}}>{item.status}</p>
-                                {/* <p><button onClick={() => { alert(`handle xóa địa chỉ có ID = ${item.ID}`); }}>Hủy</button></p> */}
-                              </div>
-                            </Link>
-                          )
-                        }) :null
+                          <Link style={{ textDecoration: 'none', color: 'black' }}
+                            // to={`/fooditem/${item.ID}`}
+                            onClick={() => { setMenuNavBar([false, true, false]); setOrderID(item) }}
+                          >
+                            <div className="item-user-adress" style={{ cursor: 'pointer' }}>
+                              <p>{item.ID}</p>
+                              <p style={{ fontSize: 16, fontWeight: '500', color: '#FA4A0C' }}>{VNDFormat(item.Total)}đ</p>
+                              <p style={{}}>{item.status}</p>
+                              {/* <p><button onClick={() => { alert(`handle xóa địa chỉ có ID = ${item.ID}`); }}>Hủy</button></p> */}
+                            </div>
+                          </Link>
+                        })
                       }
                     </div>
-                    {/* end of container all orders */}
+
                   </div>
                 </div>
-              </div> : menuNavBar[1]?<OrderDetail data={orderID}/>:null}
+              </div> : menuNavBar[1] ? <OrderDetail data={orderID} onClickClose={() => { setMenuNavBar([false, false, true]) }} /> :
+                menuNavBar[3] ?
+
+                  <div className="container-info">
+                    <div className="my-profile-header">
+                      {/* header */}
+                      <p>Yêu thích</p>
+                      {/* end of header */}
+                    </div>
+                    <div className="user-info">
+                      <div className="container-user-info">
+                        <div className="container-user-adress">
+                          {
+                            mainData.map((item) => {
+                              <Link style={{ textDecoration: 'none', color: 'black' }}
+                                // to={`/fooditem/${item.ID}`}
+                                onClick={() => { setMenuNavBar([false, true, false]); setOrderID(item) }}
+                              >
+                                <div className="item-user-adress" style={{ cursor: 'pointer' }}>
+                                  <p>{item.ID}</p>
+                                  <p style={{ fontSize: 16, fontWeight: '500', color: '#FA4A0C' }}>{VNDFormat(item.Total)}đ</p>
+                                  <p style={{}}>{item.status}</p>
+                                  {/* <p><button onClick={() => { alert(`handle xóa địa chỉ có ID = ${item.ID}`); }}>Hủy</button></p> */}
+                                </div>
+                              </Link>
+                            })
+                          }
+                        </div>
+
+                      </div>
+                    </div>
+                  </div> : null}
         </div>
 
         {/* end of right nav */}

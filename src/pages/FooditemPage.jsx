@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { AiFillCreditCard, AiOutlineCloseCircle, AiOutlineStar, AiFillStar } from 'react-icons/ai'
+import { AiFillCreditCard, AiOutlineCloseCircle, AiOutlineStar, AiFillStar, AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import '../styles/FooditemPage.css'
 import { allComment, productsData } from '../db.js'
-import { createCart, getAllProduct, getCart, updateCart } from '../apicalls'
+import { createCart, createFav, deleteFav, getAllProduct, getCart, getFav, updateCart } from '../apicalls'
 import { AuthContext } from '../context/authcontext'
+import { VNDFormat } from '../Funtions'
 
 
 const DATA = [
@@ -42,7 +43,7 @@ const FooditemPage = () => {
 
 
     // user
-    const {curentUser,setRefresh,refresh} = useContext(AuthContext)
+    const { curentUser, setRefresh, refresh } = useContext(AuthContext)
 
     // sử lý vẽ ngôi sao 
 
@@ -117,9 +118,39 @@ const FooditemPage = () => {
     }
 
 
+    // sử lý lấy Yêu thích
+    const [isFav, setIsFav] = useState(false)
+    const [allFav, setAllFav] = useState([])
+    useEffect(() => {
+        if (curentUser) { getFav(curentUser[0].id, [allFav, setAllFav]) }
+    }, [curentUser])
+
+    useEffect(() => {
+        if (allFav.length) {
+            allFav.forEach(item => {
+                if (item.itemID == pathID.split('/')[2]) {
+                    setIsFav(true)
+                }
+            })
+        }
+    }, [curentUser, allFav])
+
+
+    const handleAddFav = () => {
+        if (!isFav) {
+            if (curentUser) { createFav(curentUser[0].id, pathID.split('/')[2]) }
+            setIsFav(true)
+        }
+        if (isFav) {
+            setIsFav(false)
+            if (curentUser) deleteFav(curentUser[0].id, pathID.split('/')[2])
+        }
+        setRefresh(!refresh)
+    }
+
     return (
         <div className='fooditempage-main-container'>
-            <div className="item-info-container">
+            <div className="item-info-container" style={{ position: 'relative',marginBottom:200 }}>
                 {/* left nav */}
                 <div className="left-nav-container">
                     <div className="img-container">
@@ -129,8 +160,8 @@ const FooditemPage = () => {
                     {foodNamePrice ?
                         <div className="container-name-price-addtocartbtn">
                             <p className='Name'>{foodNamePrice.Name}</p>
-                            <p className='Price'>{foodNamePrice.price} đ</p>
-                            <button onClick={()=>handleAddCart()}>thêm vào giỏ </button>
+                            <p className='Price'>{VNDFormat(foodNamePrice.price)} đ</p>
+                            <button onClick={() => handleAddCart()}>Thêm vào giỏ </button>
                         </div>
                         : null}
                     {/* end of  item name price and add to cart button container  */}
@@ -138,49 +169,20 @@ const FooditemPage = () => {
                 {/* end of left nav */}
                 {/* right nav */}
                 {foodNamePrice ? <div className="right-nav-container">
-                    <p className='header'>mô tả món ăn</p>
+                    <p className='header'>Mô tả món ăn</p>
                     <p>{foodNamePrice.des}</p>
                     <p className='header'>Chính sách hoàn tiền</p>
                     <p>Hoàn tiền 100% nếu món ăn giao đến không đạt chất lượng hoặc không giống với hình </p>
                 </div> : null}
 
                 {/* end of right nav */}
+
+                <div style={{ position: 'absolute', top: 30, right: 30, cursor: 'pointer' }} onClick={() => handleAddFav()}>
+                    {!isFav ? <AiOutlineHeart size={34} /> : <AiFillHeart size={34} />}
+                </div>
             </div>
             {/* comment container */}
-            <div className="comment-container" style={{ display: 'flex', flexDirection: 'column', marginBottom: '20px' }}>
-                {/* title */}
-                <p className='title'>Đánh giá</p>
-                <div style={{ flex: 1, marginLeft: 20, marginRight: 20 }}>
-                    {/* 1 comment component */}
-                    <div className="" style={{ display: 'flex', flexDirection: 'row', marginBottom: '35px', backgroundColor: '#fff' }}>
-                        <div style={{ height: '40px', width: '40px', borderRadius: '20px', overflow: 'hidden' }}>
-                            <img src={require('../assets/profile.jpg')} alt="" style={{ height: '40px' }} />
-                        </div>
-                        <div style={{ flex: 1, display: 'flex', textAlign: 'left', alignItems: 'left', flexDirection: 'column', marginLeft: '10px' }}>
-                            <p style={{ fontSize: '20px', margin: '5px', fontWeight: '600' }}>user name</p>
-                            {/* sử lý vẽ ngôi sao  */}
-                            <div style={{ marginLeft: 5 }}>
-                                {allstar.map(item => {
-                                    if (item <= 3) {
-                                        return (
-                                            <AiFillStar />
-                                        )
-                                    } else {
-                                        return (
-                                            <AiOutlineStar />
-                                        )
-                                    }
-                                })}
-                            </div>
-                            {/* end of sử lý vẽ ngôi sao  */}
-                            <div style={{ marginLeft: '5px' }}>
-                                <p>đánh giá sản phẩm </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* end of title */}
-            </div>
+           
 
             {/*  end of comment container */}
         </div>

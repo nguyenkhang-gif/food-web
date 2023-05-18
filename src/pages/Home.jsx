@@ -43,10 +43,10 @@ const Data = [
 
 const Home = () => {
 
-    const {curentUser} = useContext(AuthContext)
-    useEffect(()=>{
-        console.log(curentUser?'there is user':'there are no user')
-    },[])
+    const { curentUser } = useContext(AuthContext)
+    useEffect(() => {
+        console.log(curentUser ? 'there is user' : 'there are no user')
+    }, [])
 
     // all calls
     // const callapi = async ([data,setdata]) => {
@@ -58,7 +58,7 @@ const Home = () => {
     //             setdata(res.data)
     //         })
     //     }catch(err){
-    
+
     //     }
     //     // return final
     // }
@@ -68,7 +68,8 @@ const Home = () => {
 
 
     const [allproduct, setAllProduct] = useState([])
-    
+    const [allproduct2, setAllProduct2] = useState([])
+
     // const [tempTEst,setTempTest]= useState('shti')
     // const callapi = async () => {
     //     try{
@@ -80,13 +81,13 @@ const Home = () => {
     //     }catch(err){
 
     //     }
-            
+
     // }
-    const getimurlwithID = (ID)=>{
-        let temp 
-        productsData.forEach(item =>{
-            if(item.id==ID){
-                temp=item.imgurl
+    const getimurlwithID = (ID) => {
+        let temp
+        productsData.forEach(item => {
+            if (item.id == ID) {
+                temp = item.imgurl
             }
         })
         return temp
@@ -95,12 +96,35 @@ const Home = () => {
 
     useEffect(() => {
         // setAllProduct(productsData)
-       
-        getAllProduct([allproduct,setAllProduct])
-        
+
+        getAllProduct([allproduct, setAllProduct])
+        getAllProduct([allproduct2, setAllProduct2])
+
         // temp.forEach(item=>{console.log(item)})
         // setAllProducts
     }, [])
+
+    const [searchValue, setSearchValue] = useState('')
+
+
+    const handleSearch = ()=>{
+        const name = searchValue
+        let newarray=[]
+        // setAllstudentEx({allStudent})
+        allproduct2.forEach(item=>{
+          if(item.Name.includes(name)||item.Name.includes(name.toUpperCase())||item.Name.includes(name.toLowerCase())){
+            newarray.push(item)
+            console.log(item)
+          }
+        })
+        setAllProduct(newarray)
+    }
+
+    const VNDFormat =(e) =>{
+        let temp = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(e)
+        
+        return temp.slice(0,-1)
+    }
     return (
         <div className='home-main-container'>
             <div className="intro-container" >
@@ -118,8 +142,11 @@ const Home = () => {
 
             <div className="container-search-bar">
                 <div className="container-inner">
-                    <input type="text" placeholder='tìm món ăn yêu thích của bạn' />
-                    <FiSearch className='icon-search' />
+                    <input type="text" placeholder='tìm món ăn yêu thích của bạn' onChange={(e)=>setSearchValue(e.target.value)} />
+                    <div onClick={() => { handleSearch() }}>
+
+                        <FiSearch className='icon-search' />
+                    </div>
                 </div>
             </div>
 
@@ -127,7 +154,7 @@ const Home = () => {
 
             <div className="food-item-container">
                 {allproduct.map((item) => {
-                    return (<FoodItem id={item.ID} key={item.ID} price={item.price} imgurl={getimurlwithID(item.ID)} name={item.Name} />)
+                    return (<FoodItem id={item.ID} key={item.ID} price={VNDFormat(item.price)} imgurl={getimurlwithID(item.ID)} name={item.Name} />)
                 })}
             </div>
         </div>

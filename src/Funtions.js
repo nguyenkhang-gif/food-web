@@ -21,3 +21,9 @@ export  const getimurlwithID = (ID) => {
     })
     return temp
 }
+
+export   const VNDFormat =(e) =>{
+    let temp = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(e)
+    
+    return temp.slice(0,-1)
+}

@@ -6,7 +6,10 @@ import { BsCash } from 'react-icons/bs'
 import { useContext } from 'react'
 import { AuthContext } from '../context/authcontext'
 import { createOrder, deleteCart } from '../apicalls'
+import { useNavigate } from 'react-router-dom'
 const CheckoutPage = ({ mainData, total, closeTab, data }) => {
+
+    const navigate = useNavigate()
 
     const { curentUser, refresh, setRefresh, OrderRefresh } = useContext(AuthContext)
     const [user, setUser] = useState()
@@ -61,7 +64,7 @@ const CheckoutPage = ({ mainData, total, closeTab, data }) => {
                 <p className='title'>Delivery</p>
                 <div className="address-container">
                     <p className='title'>Address details</p>
-                    <p className='change'>change</p>
+                    <p className='change' onClick={()=>{navigate('/userprofile')}}>Change</p>
                     {/* user name address phone Num */}
                     {user ? <div className="Name-address-phonnum">
                         <p className='Name'>{curentUser?.[0].Name}</p>
@@ -79,10 +82,10 @@ const CheckoutPage = ({ mainData, total, closeTab, data }) => {
                             <input type="checkbox" checked={pickUpDoorDeliver[0]} onChange={() => { setPickUpDoorDeliver([true, false]) }} />
                             Giao hàng
                         </p>
-                        <p className='pick-up'>
+                        {/* <p className='pick-up'>
                             <input type="checkbox" checked={pickUpDoorDeliver[1]} onChange={() => { setPickUpDoorDeliver([false, true]) }} />
                             Nhận tại quán
-                        </p>
+                        </p> */}
                     </div> : null}
                 </div>
                 {/* total container */}
@@ -98,7 +101,7 @@ const CheckoutPage = ({ mainData, total, closeTab, data }) => {
                         createOrder(curentUser[0].id, curentUser[0].addressDes, curentUser[0].phonDes, 'on Going', '', JSON.stringify(data), total);
                         clearCart()
                         setRefresh(!refresh)
-                        alert('đặt thành công bạn có thể vào phần orders để check tiến độ')
+                        alert('Đặt thành công bạn có thể vào phần orders để check tiến độ')
                         reloadPage()
                         // navigation.navigate('homescreen')
                     }}>Xác nhận</button>

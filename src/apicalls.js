@@ -1,14 +1,14 @@
 import axios from 'axios'
 
-export  const getAllProduct = async ([data,setdata]) => {
+export const getAllProduct = async ([data, setdata]) => {
     // let final
-    try{
+    try {
         axios.get(`http://localhost/food-app-api/product/read.php`)
-        .then((res) => {
-            console.log(res.data)
-            setdata(res.data)
-        })
-    }catch(err){
+            .then((res) => {
+                console.log(res.data)
+                setdata(res.data)
+            })
+    } catch (err) {
 
     }
     // return final
@@ -16,11 +16,11 @@ export  const getAllProduct = async ([data,setdata]) => {
 
 
 export const register = async (data) => {
-    // console.log(data.email)
+    console.log("register call")
     try {
         axios.post(`http://localhost/food-app-api/user/register.php`, { email: data.email, password: data.password })
             .then((res) => {
-                console.log("user have been create")
+                console.log("user have been create",res)
                 // setdata(res.data)
             })
     } catch (err) {
@@ -71,11 +71,11 @@ export const getFav = async (userID, [data, setdata]) => {//ID là user ID desc 
     try {
         axios.post(`http://localhost/food-app-api/fav/read.php`, { userID: userID })
             .then((res) => {
-                console.log("fav num has been calls: ", res.data=='none')
+                console.log("fav num has been calls: ", res.data == 'none')
                 if (res.data != 'none') {
                     console.log('there is a res')
                     setdata(res.data)
-                }else {
+                } else {
                     console.log('set main data = []')
                     setdata([])
                 }
@@ -140,11 +140,12 @@ export const getCart = async (userID, [data, setdata]) => {//ID là user ID desc
         axios.post(`http://localhost/food-app-api/cart/read.php`, { userID: userID })
             .then((res) => {
                 console.log("cart num has been called")
-                if (res.data != 'none') 
-                {
+                if (res.data != 'none') {
                     setdata(res.data)
                 }
-                else setdata([])
+                else {
+                    setdata([])
+                }
             })
     } catch (err) {
 
@@ -155,16 +156,16 @@ export const getCart = async (userID, [data, setdata]) => {//ID là user ID desc
 // orders
 
 
-export const createOrder = async (userID, addressID, phonenumID, status,des,OrderInfo,Total) => {//ID là user ID desc là sđt của user 
+export const createOrder = async (userID, addressID, phonenumID, status, des, OrderInfo, Total) => {//ID là user ID desc là sđt của user 
     try {
         axios.post(`http://localhost/food-app-api/order/create.php`, {
             userID: userID,
             addressID: addressID,
             phonenumID: phonenumID,
             status: status,
-            des:des,
-            OrderInfo:OrderInfo,
-            Total:Total
+            des: des,
+            OrderInfo: OrderInfo,
+            Total: Total
         })
             .then((res) => {
                 // if (res.data != 'none') {
@@ -176,14 +177,19 @@ export const createOrder = async (userID, addressID, phonenumID, status,des,Orde
 
     }
 }
-export const getOrder = async (userID,[data,setData]) => {//ID là user ID desc là sđt của user 
+export const getOrder = async (userID, [data, setData]) => {//ID là user ID desc là sđt của user 
     try {
         axios.post(`http://localhost/food-app-api/order/read.php`, {
             userID: userID,
         })
             .then((res) => {
-                console.log("order num has been get")
-                setData(res.data)
+                if (res.data != 'none') {
+                    console.log('there is a res')
+                    setData(res.data)
+                } else {
+                    console.log('set main data = []')
+                    setData([])
+                }
             })
     } catch (err) {
 
